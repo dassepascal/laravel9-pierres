@@ -19,7 +19,7 @@ class StoneFactory extends Factory
         return [
 
             'name'=>$this->faker->word(),
-             'composition_chimique'=>$this->faker->sentence(3,true) ,
+             'composition_chimique'=>$this->faker->sentence(3) ,
              'density'=>$this->faker->randomDigit(),
              'hardness'=>$this->faker->biasedNumberBetween($min = 1, $max = 8, $function = 'sqrt'),
              'chakra'=>$this->faker->sentence(3,true),
@@ -27,7 +27,7 @@ class StoneFactory extends Factory
             'origin'=>$this->faker->sentence(3,true),
             'scarcity'=>$this->faker->biasedNumberBetween($min = 1, $max = 3, $function = 'sqrt'),
             'properties'=>$this->faker->text($maxNbChars = 50),
-            'purification'=>$this->faker->sentence(3,true),
+            'purification'=>$this->faker->sentence(3),
             'image'=>$this->faker->imageUrl(),
 
         ];

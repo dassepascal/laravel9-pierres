@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="text-center my-5">Créer une nouvelle pierre</h1>
-<form action="#" method="POST">
+<form action="{{ route('stones.store') }}" method="POST">
     @csrf
     <div class="col-12">
         <div class="form-group">
@@ -14,19 +14,19 @@
     <div class="col-12">
         <div class="form-group">
             <label >Composition chimique </label>
-            <input type="text" name="compochim" class="form-control" placeholder="la composition chimique">
+            <input type="text" name="composition_chimique" class="form-control" placeholder="la composition chimique">
         </div>
     </div>
     <div class="col-12">
         <div class="form-group">
             <label > Densité</label>
-            <input type="text" name="densite" class="form-control" placeholder="la densité">
+            <input type="text" name="density" class="form-control" placeholder="la densité">
         </div>
     </div>
     <div class="col-12">
         <div class="form-group">
             <label > Dureté</label>
-            <input type="text" name="durete" class="form-control" placeholder="la dureté">
+            <input type="text" name="hardness" class="form-control" placeholder="la dureté">
         </div>
     </div>
     <div class="col-12">
@@ -38,20 +38,32 @@
     <div class="col-12">
         <div class="form-group">
             <label > Le système cristallin </label>
-            <input type="text" name="system_cristallin" class="form-control" placeholder="le systeme cristallin">
+            <input type="text" name="system_cristalin" class="form-control" placeholder="le systeme cristallin">
         </div>
     </div>
     <div class="col-12">
         <div class="form-group">
             <label > Origine</label>
-            <input type="text" name="origine" class="form-control" placeholder="le pays d'origine">
+            <input type="text" name="origin" class="form-control" placeholder="le pays d'origine">
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-group">
+            <label > Rareté</label>
+            <input type="text" name="scarcity" class="form-control" placeholder="rareté">
         </div>
     </div>
     <div class="col-12">
         <div class="form-group">
             <label > Les propriétés</label>
-            <textarea name="content" class="form-control w-100" ></textarea>
+            <textarea id="tinycme-editor" name="content" class="form-control w-100" ></textarea>
         </div>
+        <script>
+            tinymce.init({
+                selector: '#tinycme-editor',
+
+            });
+        </script>
     </div>
     <div class="col-12">
         <div class="form-group">

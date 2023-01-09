@@ -30,3 +30,4 @@ Route::get('/home',[App\Http\Controllers\HomeController::class,'index'])->name('
 
 Route::get('/admin/stones',[StoneController::class,'index'])->middleware('admin')->name('stones.index');
 Route::get('/admin/stones/create',[StoneController::class,'create'])->middleware('admin')->name('stores.create');
+Route::post('/admin/stones/store',[StoneController::class,'store'])->middleware('admin')->name('stones.store');

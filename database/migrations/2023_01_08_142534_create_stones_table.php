@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('scarcity');
             $table->text('properties');
             $table->string('purification');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();
         });

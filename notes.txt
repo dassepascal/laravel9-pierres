@@ -73,6 +73,13 @@ php artisan make:request StoneRequest
     }
 
 
+implementer la function store
+   public function store(Request $request)
+    {
+        dd($request->all());
+    }
+
+
 passage à true pour permettre à la requéte de passer
 
 definition des rules
@@ -211,3 +218,6 @@ public function handle(Request $request, Closure $next, ...$guards)
         return $next($request);
     }
 
+ajout d'un editeur de text
+<script src="https://cdn.tiny.cloud/1/vxfcf4bxrnn14o8lr9sboey5yz954t62d6ar3izu54gkctb3/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>

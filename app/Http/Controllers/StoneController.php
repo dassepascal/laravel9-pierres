@@ -40,7 +40,23 @@ class StoneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Stone::create([
+            'name'=>$request->input('name'),
+            'composition_chimique'=>$request->input('composition_chimique'),
+            'density'=>$request->input('density'),
+            'hardness'=>$request->input('hardness'),
+            'chakra'=>$request->input('chakra'),
+            'system_cristalin'=>$request->input('system_cristalin'),
+            'origin'=>$request->input('origin'),
+            'scarcity'=>$request->input('scarcity'),
+            'properties'=>$request->input('content'),
+            'purification'=>$request->input('purification'),
+            'image'=>$request->input('image'),
+
+
+
+        ]);
+        return redirect()->route('stones.index');
     }
 
     /**
