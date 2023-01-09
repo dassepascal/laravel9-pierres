@@ -28,4 +28,5 @@ Route::get('/stones/{slug}',[MainController::class,'show'])->name('stone');
 
 Route::get('/home',[App\Http\Controllers\HomeController::class,'index'])->name('home');
 
-Route::get('/admin/stones',[StoneController::class,'index'])->middleware('admin');
+Route::get('/admin/stones',[StoneController::class,'index'])->middleware('admin')->name('stones.index');
+Route::get('/admin/stones/create',[StoneController::class,'create'])->middleware('admin')->name('stores.create');

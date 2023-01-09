@@ -14,10 +14,11 @@ class StoneController extends Controller
      */
     public function index()
     {
+        $stones = Stone::paginate(7);
 
+        return view('stones.index', [
+            'stones'=>$stones,
 
-        return view('stones.index',[
-            
         ]);
     }
 
@@ -28,7 +29,7 @@ class StoneController extends Controller
      */
     public function create()
     {
-        //
+        return view('stones.create');
     }
 
     /**

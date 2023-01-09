@@ -19,7 +19,7 @@
                     @if (Auth::user())
                     @if (Auth::user()->role === 'ADMIN')
                     <li class="nav-item   ">
-                        <a class="nav-link " href="#">Espace Admin</a>
+                        <a class="nav-link " href="{{ route('stones.index') }}">Espace Admin</a>
                     </li>
                     @endif
                     <li class="nav-item  ">
