@@ -1,0 +1,213 @@
+Laravel Debugbar
+composer require barryvdh/laravel-debugbar --dev
+
+Api information à envoyer mes endpoints
+
+principes: database de pierres
+creation du model : php artisan make:model Stone -m
+
+creation du seeder: php artisan make:seeder StoneTableSeeder
+
+dans dataseeder
+$this ->call(StoneTableSeeder::class)
+
+factory:
+php artisan make:factory StoneFactory --model=Stone
+
+seeder
+
+class StoneTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Stone::factory(30)->create();
+        //
+    }
+}
+
+
+php artisan migrate --seed
+
+install de bootstrap
+composer require laravel/ui
+php artisan ui bootstrap --auth
+npm install
+Step 5: Import vite.config.js Bootstrap 5 Path
+First, you need to change vite.config.js and add the bootstrap 5 path & remove resources/css/app.css
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import path from 'path'
+
+export default defineConfig({
+    plugins: [
+        laravel([
+            'resources/js/app.js',
+        ]),
+    ],
+    resolve: {
+        alias: {
+            '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+        }
+    },
+});
+Step 6: Update bootstrap.js
+We need to use import instead of require.
+
+
+pagination
+creation du repertoire vendor dans resources
+creation du sous repertoire pagination
+creation du fichier custom
+
+StoneRequest
+php artisan make:request StoneRequest
+
+   public function authorize()
+    {
+        return true;
+    }
+
+
+passage à true pour permettre à la requéte de passer
+
+definition des rules
+
+creation d'un observer
+php artisan make:observer StoneObserver --model=Stone
+
+php artisan tinker
+mise en place du slug
+dans AppServiceProvider
+
+  public function boot()
+    {
+        Stone::observe(StoneObserver::class);
+    }
+
+php artisan db:seed --class=StoneTableSeeder
+ne pas oublier de vider la table Stone
+
+creation d'un helper
+composer require laravel/helpers
+
+route dynamique
+Route::get('/stones/{slug}',[MainController::class,'show'])->name('stone');
+
+creation du lien qui va afficher la perre en détail
+    <a href="{{ route('stone',$stone->slug) }}" class="btn btn-primary text-light"> Lire
+                            la
+                            suite</a>
+
+Dans MainController
+methode show
+  public function show($slug){
+        $stone = Stone::where('slug', $slug)->firstOrFail();
+        dd($stone);
+        return view('stone',[
+            'stone'=>$stone,
+        ]);
+    }
+
+    Authentification:
+
+creation des boutons me connecter et deconnecte dans incs
+
+dans Auth/RegisterController.php
+
+changement de la direction quand l'utilisateur est identifié:  protected $redirectTo = '/';
+
+loginController:  protected $redirectTo = ('/');
+
+modification des views register et login
+
+
+gestion des roles
+ajout dans la table user : $table->string('role');
+
+refaire les tablephp artisan migrate:refresh
+
+RegisterController
+modification de la methode pour le role:
+
+protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role'=>'USER',
+        ]);
+    }
+
+dans model user
+'role'
+
+
+role admin
+creer un seeder: php artisan make:seed UserSeeder
+dans UserSeeder
+public function run()
+    {
+        User::create([
+            'email'=>'admin@admin.com',
+            'name'=>'admin',
+            'password'=>Hash::make('toor'),
+            'role'=>User::ADMIN_ROLE,
+        ]);
+    }
+
+centralisation des infos des roles
+creation des const dans model user
+
+ const USER_ROLE = 'USER';
+    const ADMIN_ROLE = 'ADMIN';
+
+    utilisation des const dans RegisterController et UserSeeder
+
+middleware
+creation d'un controller
+php artisan make:controller StoneController -r
+
+route
+Route::get('/admin/stones',[StoneController::class,'index']);
+
+test de la route
+http://127.0.0.1:8000/admin/stones
+
+creation d'un middleware
+php artisan make:middleware AdminMiddleware
+
+on va verifier 2 choses:
+//est ce que la personne est connecté?
+// ne pas laisse passer les personnes avec le role user
+
+if(Auth::user()){
+    die('AUTHENTICATED')
+}
+die(' Not auth')
+return $next($request);
+
+il va rien se passer si pas de route il faut enregistre dans le kernel:
+'admin' => \App\Http\Middleware\AdminMiddleware::class,
+    ];
+web
+:
+changement du redirect dans RedirectIfAuthenticated
+public function handle(Request $request, Closure $next, ...$guards)
+    {
+        $guards = empty($guards) ? [null] : $guards;
+
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                return redirect('/');
+            }
+        }
+
+        return $next($request);
+    }
+
