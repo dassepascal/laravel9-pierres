@@ -49,7 +49,7 @@ class StoneController extends Controller
             'system_cristalin'=>$request->input('system_cristalin'),
             'origin'=>$request->input('origin'),
             'scarcity'=>$request->input('scarcity'),
-            'properties'=>$request->input('content'),
+            'properties'=>$request->input('properties'),
             'purification'=>$request->input('purification'),
             'image'=>$request->input('image'),
 

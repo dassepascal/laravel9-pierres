@@ -56,7 +56,7 @@
     <div class="col-12">
         <div class="form-group">
             <label > Les propriétés</label>
-            <textarea id="tinycme-editor" name="content" class="form-control w-100" ></textarea>
+            <textarea id="tinycme-editor" name="properties" class="form-control w-100" ></textarea>
         </div>
         <script>
             tinymce.init({

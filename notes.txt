@@ -221,3 +221,5 @@ public function handle(Request $request, Closure $next, ...$guards)
 ajout d'un editeur de text
 <script src="https://cdn.tiny.cloud/1/vxfcf4bxrnn14o8lr9sboey5yz954t62d6ar3izu54gkctb3/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
+
+
