@@ -223,3 +223,72 @@ ajout d'un editeur de text
         referrerpolicy="origin"></script>
 
 
+pb d'affichage dans stone.blade.php : impossible de centrer {!! $stone->properties !!}
+
+cas ou enregistre avec les champs vide:
+SQLSTATE[23000]: Integrity constraint violation: 1048 Le champ 'name' ne peut être vide (null)
+
+Validation des données:
+php artisan make:request StoneRequest
+
+creation des rules :
+public function rules()
+    {
+        return [
+            'name'=>'required|min:3|max:50',
+            'composition_chimique'=>'required|min:6|max:100',
+            'density'=>'required|max:1',
+            'hardness'=>'required|max:1',
+            'chakra'=>'required|max:100',
+            'system_cristalin'=>'required|max:1',
+            'origin'=>'required|max:10',
+            'scarcity'=>'required|max:1',
+            'propertie'=>'required|max:255',
+            'purification'=>'required|max:20',
+
+            //todo
+            //'image'=>'required',
+
+        ];
+    }
+
+    modification du controller StoneController
+    avant :public function store(Request $request)
+
+    apres :public function store(StoneRequest $request)
+
+    implementation des messages
+
+    mise en place de la variable dans store :
+    $validated = $request->validated();
+
+    dans la vue verification des erreurs dans le template create.blade.php
+    @extends('base')
+
+@section('content')
+@dump($errors->all());
+
+result: un tableau vide
+si on enregistre on a:
+array:10 [▼ // resources\views/stones/create.blade.php
+  0 => "The name field is required."
+  1 => "The composition chimique field is required."
+  2 => "The density field is required."
+  3 => "The hardness field is required."
+  4 => "The chakra field is required."
+  5 => "The system cristalin field is required."
+  6 => "The origin field is required."
+  7 => "The scarcity field is required."
+  8 => "The propertie field is required."
+  9 => "The purification field is required."
+]
+
+affichage au niveau du champ:
+  @error('name')
+            <span class="invalid-feedback" role="alert">
+                <strong> {{ $message }}</strong>
+            </span>
+            @enderror
+
+            result :rien ne s'afficher
+            .invalid-feeback { display:none}

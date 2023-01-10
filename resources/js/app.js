@@ -8,6 +8,6 @@ console.log('hello');
 
 var test = 'hello';
 console.log(test);
-var properties = document.querySelector('#properties');
 
-console.log(properties);
+var invalideFeedback = document.querySelector('.invalid-feedback')
+console.log(invalideFeedback);

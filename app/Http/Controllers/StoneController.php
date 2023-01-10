@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Stone;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoneRequest;
 
 class StoneController extends Controller
 {
@@ -35,11 +36,13 @@ class StoneController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Request\StoneRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoneRequest $request)
     {
+        $validated = $request->validated();
+        
         Stone::create([
             'name'=>$request->input('name'),
             'composition_chimique'=>$request->input('composition_chimique'),
