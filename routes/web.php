@@ -25,13 +25,17 @@ Auth::routes();
 
 Route::get('/', [MainController::class, 'home'])->name('home');
 Route::get('/stones',[MainController::class,'indexStones'])->name('stones');
-Route::get('/stones/{slug}',[MainController::class,'show'])->name('stone');
+Route::get('/stones/{stone:slug}',[MainController::class,'show'])->name('stone');
 
 Route::get('/home',[App\Http\Controllers\HomeController::class,'index'])->name('home');
 
 Route::get('/admin/stones',[StoneController::class,'index'])->middleware('admin')->name('stones.index');
 Route::get('/admin/stones/create',[StoneController::class,'create'])->middleware('admin')->name('stores.create');
 Route::post('/admin/stones/store',[StoneController::class,'store'])->middleware('admin')->name('stones.store');
+
+Route::delete('/admin/stones/{stone}/delete>',[StoneController::class,'delete'])->middleware('admin')->name('stones.delete');
+Route::get('/admin/stones/{stone}/edit',[StoneController::class,'edit'])->middleware('admin')->name('stones.edit');
+Route::put('/admin/stones/{stone}/update',[StoneController::class,'update'])->middleware('admin')->name('stones.update');
 
 //upload image
 Route::get('/image', [ImageController::class,'index'])->name('image.index');

@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Stone;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoneRequest;
+use App\Manager\StoneManager;
 
 class StoneController extends Controller
 {
+    /**
+     * definition  StoneController build
+     * service
+     * class
+     * injected
+     */
+
+    private $stoneManager;
+    public function __construct(StoneManager $stoneManager)
+    {
+        $this->stoneManager = $stoneManager;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +55,7 @@ class StoneController extends Controller
     public function store(StoneRequest $request)
     {
         $validated = $request->validated();
-        
+
         Stone::create([
             'name'=>$request->input('name'),
             'composition_chimique'=>$request->input('composition_chimique'),
@@ -55,11 +68,9 @@ class StoneController extends Controller
             'properties'=>$request->input('properties'),
             'purification'=>$request->input('purification'),
             'image'=>$request->input('image'),
-
-
-
         ]);
-        return redirect()->route('stones.index');
+        return redirect()->route('stones.index')->with('success', "La pierre a bien été enregistré !");
+        // return redirect()->route('stones.index')->with('success', 'la pierre a bien été enregistré');
     }
 
     /**
@@ -81,7 +92,9 @@ class StoneController extends Controller
      */
     public function edit(Stone $stone)
     {
-        //
+        return view('stones.edit', [
+            'stone'=> $stone,
+        ]);
     }
 
     /**
@@ -91,9 +104,30 @@ class StoneController extends Controller
      * @param  \App\Models\Stone  $stone
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stone $stone)
+    public function update(StoneRequest $request, Stone $stone)
     {
-        //
+
+$this->stoneManager->build($stone, $request);
+
+        //dd($stone);
+        //dd($this->stoneManager);
+
+
+
+        // dd(get_class_methods($this->stoneManager));
+        // $stone->name = $request->input('name');
+        // $stone->composition_chimique = $request->input('composition_chimique');
+        // $stone->density = $request->input('density');
+        // $stone->hardness = $request->input('hardness');
+        // $stone->chakra = $request->input('chakra');
+        // $stone->system_cristalin = $request->input('system_cristalin');
+        // $stone->origin = $request->input('origin');
+        // $stone->scarcity = $request->input('scarcity');
+        // $stone->properties = $request->input('properties');
+        // $stone->purification = $request->input('purification');
+
+        // $stone->save();
+        return redirect()->route('stones.index')->with('success', "La pierre a bien modifié !");
     }
 
     /**
@@ -102,8 +136,9 @@ class StoneController extends Controller
      * @param  \App\Models\Stone  $stone
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Stone $stone)
+    public function delete(Stone $stone)
     {
-        //
+        $stone->delete();
+        return redirect()->route('stones.index')->with('success', 'la pierre a bien été supprimer');
     }
 }

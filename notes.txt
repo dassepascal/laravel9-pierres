@@ -259,6 +259,8 @@ public function rules()
 
     implementation des messages
 
+    dans edit : @dump(Sesion::all());
+
     mise en place de la variable dans store :
     $validated = $request->validated();
 
@@ -292,3 +294,151 @@ affichage au niveau du champ:
 
             result :rien ne s'afficher
             .invalid-feeback { display:none}
+
+route binding
+avant
+  public function show($slug){
+        $stone = Stone::where('slug', $slug)->firstOrFail();
+
+        return view('stone',[
+            'stone'=>$stone,
+        ]);
+    }
+    apres
+      public function show(Stone $stone){
+        $stone = Stone::where('slug', $slug)->firstOrFail();
+
+        return view('stone',[
+            'stone'=>$stone,
+        ]);
+    }
+
+
+methode delete
+Route:delete('/admin/stones/{slug}',[stoneController::class,'delete])->middleware('admin')->name('stones.delete);
+
+
+methode modifier une pierre
+
+ne pas oublier de modifier observer car quand on modifie une pierre le slug ne change pas
+dans StoneObserver
+  public function updated(Stone $stone)
+    {
+        $stone->slug = Str::slug($stone->name,'-');
+        $stone->saveQuietly();
+    }
+
+
+
+
+utilisation du manager
+ creer repertoire : manager
+ creer fichier : StoneManager.php
+
+ class StoneManager
+{
+
+    public function build(Stone $stone, StoneRequest $request){
+        $stone->name = $request->input('name');
+        $stone->composition_chimique = $request->input('composition_chimique');
+        $stone->density = $request->input('density');
+        $stone->hardness = $request->input('hardness');
+        $stone->chakra = $request->input('chakra');
+        $stone->system_cristalin = $request->input('system_cristalin');
+        $stone->origin = $request->input('origin');
+        $stone->scarcity = $request->input('scarcity');
+        $stone->properties = $request->input('properties');
+        $stone->purification = $request->input('purification');
+
+        $stone->save();
+    }
+}
+
+dans StoneController
+
+creer la function:
+ /**
+     * definition  StoneController build
+     * service
+     * class
+     * injected
+     */
+
+    private $stoneManager;
+    public function __construct(StoneManager $stoneManager)
+    {
+        $this->stoneManager = $stoneManager;
+    }
+
+test:
+
+  public function update(StoneRequest $request, Stone $stone)
+    {
+        //dd($stone);
+        dd($this->stoneManager);
+
+        $stone->name = $request->input('name');
+        $stone->composition_chimique = $request->input('composition_chimique');
+        $stone->density = $request->input('density');
+        $stone->hardness = $request->input('hardness');
+        $stone->chakra = $request->input('chakra');
+        $stone->system_cristalin = $request->input('system_cristalin');
+        $stone->origin = $request->input('origin');
+        $stone->scarcity = $request->input('scarcity');
+        $stone->properties = $request->input('properties');
+        $stone->purification = $request->input('purification');
+
+        $stone->save();
+        return redirect()->route('stones.index')->with('success', "La pierre a bien modifié !");
+    }
+
+    test 2 :
+      public function update(StoneRequest $request, Stone $stone)
+    {
+        //dd($stone);
+        //dd($this->stoneManager);
+        dd(get_class($this->stoneManager));
+
+        $stone->name = $request->input('name');
+        $stone->composition_chimique = $request->input('composition_chimique');
+        $stone->density = $request->input('density');
+        $stone->hardness = $request->input('hardness');
+        $stone->chakra = $request->input('chakra');
+        $stone->system_cristalin = $request->input('system_cristalin');
+        $stone->origin = $request->input('origin');
+        $stone->scarcity = $request->input('scarcity');
+        $stone->properties = $request->input('properties');
+        $stone->purification = $request->input('purification');
+
+        $stone->save();
+        return redirect()->route('stones.index')->with('success', "La pierre a bien modifié !");
+    }
+
+meme resultat
+test 3:
+  public function update(StoneRequest $request, Stone $stone)
+    {
+        //dd($stone);
+        //dd($this->stoneManager);
+        dd(get_class_methods($this->stoneManager));
+
+        $stone->name = $request->input('name');
+        $stone->composition_chimique = $request->input('composition_chimique');
+        $stone->density = $request->input('density');
+        $stone->hardness = $request->input('hardness');
+        $stone->chakra = $request->input('chakra');
+        $stone->system_cristalin = $request->input('system_cristalin');
+        $stone->origin = $request->input('origin');
+        $stone->scarcity = $request->input('scarcity');
+        $stone->properties = $request->input('properties');
+        $stone->purification = $request->input('purification');
+
+        $stone->save();
+        return redirect()->route('stones.index')->with('success', "La pierre a bien modifié !");
+    }
+
+result:
+
+array:1 [▼ // app\Http\Controllers\StoneController.php:114
+  0 => "build"
+]

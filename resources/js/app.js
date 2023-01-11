@@ -11,3 +11,6 @@ console.log(test);
 
 var invalideFeedback = document.querySelector('.invalid-feedback')
 console.log(invalideFeedback);
+
+var close = document.querySelector('#close');
+console.log(close);

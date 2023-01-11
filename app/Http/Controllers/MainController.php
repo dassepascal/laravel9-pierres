@@ -25,11 +25,12 @@ class MainController extends Controller
             'stones'=>$stones
         ]);
     }
-    public function show($slug){
-        $stone = Stone::where('slug', $slug)->firstOrFail();
+    public function show( Stone $stone){
+        // $stone = Stone::where('slug', $slug)->firstOrFail();
 
         return view('stone',[
             'stone'=>$stone,
         ]);
     }
+   
 }

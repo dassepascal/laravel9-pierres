@@ -29,11 +29,11 @@ class StoneRequest extends FormRequest
             'density'=>'required|max:1',
             'hardness'=>'required|max:1',
             'chakra'=>'required|max:100',
-            'system_cristalin'=>'required|max:1',
-            'origin'=>'required|max:10',
+            'system_cristalin'=>'required',
+            'origin'=>'required',
             'scarcity'=>'required|max:1',
-            'propertie'=>'required|max:255',
-            'purification'=>'required|max:20',
+            'properties'=>'required|max:255',
+            'purification'=>'required',
 
             //todo
             //'image'=>'required',

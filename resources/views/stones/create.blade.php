@@ -2,15 +2,16 @@
 
 @section('content')
 {{-- to do --}}
-{{-- @dump($errors->all()); --}}
+ 
+
 <div class="container">
     <h1 class="text-center my-5">Créer une nouvelle pierre</h1>
-<form action="{{ route('stones.store') }}" method="POST">
+<form action="{{ route('stones.store') }}" method="POST" >
     @csrf
     <div class="col-12">
         <div class="form-group">
-            <label > Nom</label>
-            <input type="text" name="name" class="form-control" placeholder="nom de la pierre">
+            <label for="validationServer01" class="form-label"> Nom</label>
+            <input type="text" name="name" class="form-control "  placeholder="nom de la pierre">
             @error('name')
             <span class="valid-feedback" role="alert">
                 <strong> {{ $message }}</strong>
@@ -65,7 +66,7 @@
     <div class="col-12">
         <div class="form-group">
             <label > Le système cristallin </label>
-            <input type="text" name="system_cristalin" class="form-control" placeholder="le systeme cristallin">
+            <input type="text" name="system_cristalin" class="form-control" placeholder="le systeme cristalin">
             @error('system_cristalin')
             <span class="invalid-feedback" role="alert">
                 <strong> {{ $message }}</strong>
@@ -77,7 +78,7 @@
         <div class="form-group">
             <label > Origine</label>
             <input type="text" name="origin" class="form-control" placeholder="le pays d'origine">
-            @error('system_cristalin')
+            @error('origin')
             <span class="invalid-feedback" role="alert">
                 <strong> {{ $message }}</strong>
             </span>
@@ -97,9 +98,9 @@
     </div>
     <div class="col-12">
         <div class="form-group">
-            <label > Les propriétés</label>
-            <textarea id="tinycme-editor" name="properties" class="form-control w-100" ></textarea>
-            @error('system_cristalin')
+            <label for="validationTextarea"> Les propriétés</label>
+            <textarea id="tinycme-editor" name="properties" class="form-control w-100" id="validationTextarea"></textarea>
+            @error('properties')
             <span class="invalid-feedback" role="alert">
                 <strong> {{ $message }}</strong>
             </span>

@@ -32,7 +32,8 @@ class StoneObserver
      */
     public function updated(Stone $stone)
     {
-        //
+        $stone->slug = Str::slug($stone->name,'-');
+        $stone->saveQuietly();
     }
 
     /**
