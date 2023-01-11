@@ -47,28 +47,29 @@ class StoneController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Undocumented function
      *
-     * @param  App\Http\Request\StoneRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoneRequest $request
+     * @return void
      */
     public function store(StoneRequest $request)
     {
         $validated = $request->validated();
+        $this->stoneManager->build(new Stone(), $request);
 
-        Stone::create([
-            'name'=>$request->input('name'),
-            'composition_chimique'=>$request->input('composition_chimique'),
-            'density'=>$request->input('density'),
-            'hardness'=>$request->input('hardness'),
-            'chakra'=>$request->input('chakra'),
-            'system_cristalin'=>$request->input('system_cristalin'),
-            'origin'=>$request->input('origin'),
-            'scarcity'=>$request->input('scarcity'),
-            'properties'=>$request->input('properties'),
-            'purification'=>$request->input('purification'),
-            'image'=>$request->input('image'),
-        ]);
+        // Stone::create([
+        //     'name'=>$request->input('name'),
+        //     'composition_chimique'=>$request->input('composition_chimique'),
+        //     'density'=>$request->input('density'),
+        //     'hardness'=>$request->input('hardness'),
+        //     'chakra'=>$request->input('chakra'),
+        //     'system_cristalin'=>$request->input('system_cristalin'),
+        //     'origin'=>$request->input('origin'),
+        //     'scarcity'=>$request->input('scarcity'),
+        //     'properties'=>$request->input('properties'),
+        //     'purification'=>$request->input('purification'),
+        //     'image'=>$request->input('image'),
+        // ]);
         return redirect()->route('stones.index')->with('success', "La pierre a bien été enregistré !");
         // return redirect()->route('stones.index')->with('success', 'la pierre a bien été enregistré');
     }
