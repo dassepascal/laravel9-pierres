@@ -18,6 +18,17 @@
                 @enderror
             </div>
         </div>
+    </div class="col-12">
+    <div class="form-group">
+        <label for="category">Catégorie</label>
+        <select name="category"  class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            @foreach ($categories as $category )
+            <option value="{{  $category->id }}"  {{ $category->id === $stone->category->id ? 'selected':'' }}>{{ $category->label }}</option>
+
+            @endforeach
+        </select>
+    </div>
         <div class="col-12">
             <div class="form-group">
                 <label>Composition chimique</label>

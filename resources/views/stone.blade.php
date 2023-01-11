@@ -1,11 +1,16 @@
 @extends('base')
 @section('content')
-@dump($stone)
+{{-- @dump($stone->category) --}}
 <div class="jumbotron">
 
 
     <h2 class="display-4 text-start">{{ $stone->name}}</h2>
 </div>
+<div>
+    <h5>Categorie : <span class="badge rounded-pill text-bg-dark">{{ $stone->category->label }}</span></h5>
+
+</div>
+
 <div class="container">
     <p class=text-start my-3 pt-3>{{ $stone->composition_chimique}}</p>
     <p class=text-start my-3 pt-3>
@@ -36,7 +41,7 @@
 
 <p class="text-start">
     <span class="text-success"> Propriétés:</span>
-    {{ $stone->properties }}
+    {!! $stone->properties !!}
 </p>
 
 
@@ -54,7 +59,7 @@
 
 
 <div class="d-flex justify-content-center my-5">
-    <a class="btn btn-primary" href="{{ route('home') }}">
+    <a class="btn btn-primary" href="{{ route('stones') }}">
         <i class="fas fa-arrow-left"></i>
         Retour
     </a>

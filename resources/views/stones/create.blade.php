@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- to do --}}
- 
+
 
 <div class="container">
     <h1 class="text-center my-5">Créer une nouvelle pierre</h1>
@@ -18,6 +18,19 @@
             </span>
             @enderror
         </div>
+    </div class="col-12">
+    <div class="form-group">
+        <label for="category">Catégorie</label>
+        <select name="category"  class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            @foreach ($categories as $category )
+            <option value="{{  $category->id }}">{{ $category->label }}</option>
+
+            @endforeach
+        </select>
+    </div>
+    <div>
+
     </div>
     <div class="col-12">
         <div class="form-group">

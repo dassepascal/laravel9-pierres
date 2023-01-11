@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stone;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoneRequest;
 use App\Manager\StoneManager;
+use App\Http\Requests\StoneRequest;
 
 class StoneController extends Controller
 {
@@ -43,7 +44,9 @@ class StoneController extends Controller
      */
     public function create()
     {
-        return view('stones.create');
+        return view('stones.create',[
+            'categories'=>Category::all(),
+        ]);
     }
 
     /**
@@ -95,6 +98,7 @@ class StoneController extends Controller
     {
         return view('stones.edit', [
             'stone'=> $stone,
+            'categories'=> Category::all(),
         ]);
     }
 

@@ -4,13 +4,19 @@
 <div class="p-5 mb-4 bg-light rounded-3 mt-5">
     <div class="container-fluid ">
         <h1 id="evenements" class="display-3 text-center h1" >Pierres </h1>
+
         <div class="stones row justify-content-center ">
+
             @foreach ($stones as $stone)
 
             <div class="col-md-6 col-sm-12">
                 <div class="card my-3">
                     <div class="card-body">
                         <h5 class="card-title ">{{ $stone->name }}</h5>
+                          <div>
+                <h5>Categorie : <span class="badge rounded-pill text-bg-dark">{{ $stone->category->label }}</span></h5>
+
+            </div>
                         <p class="card-text">
                              {{ $stone->composition_chimique }}
                         </p>
