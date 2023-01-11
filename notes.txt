@@ -442,3 +442,71 @@ result:
 array:1 [▼ // app\Http\Controllers\StoneController.php:114
   0 => "build"
 ]
+
+
+relation
+
+php artisan make:model Category -m
+
+changement de la table stone
+public function up()
+    {
+        Schema::create('stones', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('composition_chimique');
+            $table->integer('density');
+            $table->integer('hardness');
+            $table->string('chakra');
+            $table->string('system_cristalin');
+            $table->string('origin');
+            $table->integer('scarcity');
+            $table->text('properties');
+            $table->string('purification');
+            $table->string('image')->nullable();
+            $table->string('slug')->nullable();
+            $table->unsignedBigInteger('category_id');
+            $table->foreignId('category_id')->references('id')->on('categories');
+            $table->timestamps();
+        });
+    }
+Attention pb de migration
+php artisan migrate:reset
+modifier l'ordre des tables pour placer la table stone en dernier à cause des cleé étrangères
+
+
+creation de categorySeeder
+
+methode assignement de masse
+dans model
+protected $fillable = ['rouge','orange','jaune','vert','bleu','indigo','violet','rose','blanc','noir'];
+
+php artisan db:seed --class=CategorySeeder
+
+ne pas oublier de ajouter category_id au fillable du Stone
+
+public function definition()
+    {
+        return [
+
+            'name'=>$this->faker->word(),
+             'composition_chimique'=>$this->faker->sentence(3) ,
+             'density'=>$this->faker->randomDigit(),
+             'hardness'=>$this->faker->biasedNumberBetween($min = 1, $max = 8, $function = 'sqrt'),
+             'chakra'=>$this->faker->sentence(3,true),
+            'system_cristalin'=>$this->faker->word(),
+            'origin'=>$this->faker->sentence(3,true),
+            'scarcity'=>$this->faker->biasedNumberBetween($min = 1, $max = 3, $function = 'sqrt'),
+            'properties'=>$this->faker->text($maxNbChars = 50),
+            'purification'=>$this->faker->sentence(3),
+            'image'=>$this->faker->imageUrl(),
+            'category_id'=>Category::inRandomOrder()->first()->id,
+
+        ];
+    }
+
+    testdans stone.blade.php
+    @dump($stone)
+ creation d'une relation plus poussé pour recupzerer directement un objet Category depuis stone
+
+ 

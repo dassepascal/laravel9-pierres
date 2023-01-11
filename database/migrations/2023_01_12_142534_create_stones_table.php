@@ -26,6 +26,8 @@ return new class () extends Migration {
             $table->string('purification');
             $table->string('image')->nullable();
             $table->string('slug')->nullable();
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

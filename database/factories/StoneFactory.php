@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -29,6 +30,7 @@ class StoneFactory extends Factory
             'properties'=>$this->faker->text($maxNbChars = 50),
             'purification'=>$this->faker->sentence(3),
             'image'=>$this->faker->imageUrl(),
+            'category_id'=>Category::inRandomOrder()->first()->id,
 
         ];
     }

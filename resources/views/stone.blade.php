@@ -1,5 +1,6 @@
 @extends('base')
 @section('content')
+@dump($stone)
 <div class="jumbotron">
 
 

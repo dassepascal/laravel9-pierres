@@ -10,6 +10,6 @@ class Stone extends Model
     use HasFactory;
 
     protected  $fillable = [
-        'name','composition_chimique','density','hardness','chakra','system_cristalin','origin','scarcity','properties','purification','image'
+        'name','composition_chimique','density','hardness','chakra','system_cristalin','origin','scarcity','properties','purification','image','category_id'
     ];
 }
