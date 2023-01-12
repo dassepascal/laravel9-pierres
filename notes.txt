@@ -699,4 +699,15 @@ ternaire:  <option value="{{  $category->id }}"  {{ $category->id === $stone->ca
 
 mise en place de one to many pour image
 
-
+dans la table image :
+ public function up()
+    {
+        Schema::create('images', function (Blueprint $table) {
+            $table->id();
+            $table->string('image');
+            // $table->unsignedBigInteger('stone_id');
+            // $table->foreign('stone_id')->references('id')->on('stones');
+             $table->foreignId('stone_id')->constrained();// nouvelle ecriture à partir de laravel 7
+            $table->timestamps();
+        });
+    }

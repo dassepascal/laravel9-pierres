@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- to do --}}
-
+@dump($images)
 
 <div class="container">
     <h1 class="text-center my-5">Créer une nouvelle pierre</h1>

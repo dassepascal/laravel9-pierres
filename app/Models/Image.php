@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Stone;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Image extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'image'
+        'image','stone_id'
     ];
+    public function stone(){
+        return $this->belongsTo(Stone::class);
+    }
 }
