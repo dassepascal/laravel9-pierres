@@ -696,3 +696,7 @@ la category dans edit
 
 mise en place d'un correctif
 ternaire:  <option value="{{  $category->id }}"  {{ $category->id === $stone->category->id ? 'selected':'' }}>{{ $category->label }}</option>
+
+mise en place de one to many pour image
+
+
