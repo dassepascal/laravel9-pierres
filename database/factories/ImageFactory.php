@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Image;
+use App\Models\Stone;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,10 +18,15 @@ class ImageFactory extends Factory
      */
     public function definition()
     {
+// $stones = Stone::all();
+// $images = Image::all();
+
         return [
             'name' =>$this->faker->word(),
             'image'=>$this->faker->imageUrl(),
-            'stone_id'=>Image::inRandomOrder()->first()->id,
+            'stone_id'=>$this->faker->numberBetween($min = 1, $max = 30) // 8567
+
+
         ];
     }
 }

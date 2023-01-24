@@ -4,10 +4,10 @@
 <div class="jumbotron">
 
 
-    <h2 class="display-4 text-start">{{ $stone->name}}</h2>
+    <h2 class="display-4 text-start custom-title">{{ $stone->name}}</h2>
 </div>
 <div>
-    <h5>Categorie : <span class="badge rounded-pill text-bg-dark">{{ $stone->category->label }}</span></h5>
+    {{-- <h5>Categorie : <span class=" ">{{ $stone->category->label }}</span></h5> --}}
 
 </div>
 
@@ -39,10 +39,10 @@
     </p>
 
 
-<p class="text-start">
-    <span class="text-success"> Propriétés:</span>
-    {!! $stone->properties !!}
-</p>
+    <p class="text-start">
+        <span class="text-success"> Propriétés:</span>
+        {!! $stone->properties !!}
+    </p>
 
 
 

@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- to do --}}
-@dump($images)
+
 
 <div class="container">
     <h1 class="text-center my-5">Créer une nouvelle pierre</h1>
@@ -141,8 +141,15 @@
     <div class="col-12">
         <div class="form-group">
             <label > image</label>
+            <select name="image"  class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                @foreach ($images as $image )
+                <option value="{{  $image->id }}">{{ $image->name }}</option>
+
+                @endforeach
+            </select>
             <input type="text" name="image" class="form-control" placeholder="image">
-            @error('system_cristalin')
+            @error('image')
             <span class="invalid-feedback" role="alert">
                 <strong> {{ $message }}</strong>
             </span>

@@ -472,7 +472,7 @@ public function up()
     }
 Attention pb de migration
 php artisan migrate:reset
-modifier l'ordre des tables pour placer la table stone en dernier à cause des cleé étrangères
+modifier l'ordre des tables pour placer la table stone en dernier à cause des cles étrangères
 
 
 creation de categorySeeder
