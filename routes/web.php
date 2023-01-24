@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\StoneController;
 
 /*
@@ -38,5 +38,15 @@ Route::get('/admin/stones/{stone}/edit',[StoneController::class,'edit'])->middle
 Route::put('/admin/stones/{stone}/update',[StoneController::class,'update'])->middleware('admin')->name('stones.update');
 
 //upload image
-Route::get('/image', [ImageController::class,'index'])->name('image.index');
-Route::post('/image', [ImageController::class,'store'])->name('image.store');
+// Route::get('/image', [ImageUploadController::class,'index'])->name('image.index');
+//
+//For adding an image
+Route::get('/add-image',[ImageUploadController::class,'addImage'])->name('images.add');
+
+//For storing an image
+Route::post('/store-image',[ImageUploadController::class,'storeImage'])
+->name('images.store');
+
+//For showing an image
+Route::get('/view-image',[ImageUploadController::class,'viewImage'])->name('images.view');
+
