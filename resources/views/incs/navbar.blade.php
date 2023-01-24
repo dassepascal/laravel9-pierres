@@ -18,7 +18,7 @@
                 <ul class="navbar-nav ml-auto  ">
                     @if (Auth::user())
                     @if (Auth::user()->role === 'ADMIN')
-                    <li class="nav-item   ">
+                    <li class="nav-item">
                         <a class="nav-link " href="{{ route('stones.index') }}">Espace Admin</a>
                     </li>
                     @endif

@@ -139,6 +139,8 @@
         </div>
     </div>
     <div class="col-12">
+
+
         <div class="form-group">
             <label > image</label>
             <input type="text" name="image" class="form-control" placeholder="image">

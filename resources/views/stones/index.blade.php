@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-   
+
     <h1 class="text-center my-5">Pierres</h1>
     <div class="d-flex justify-content-center">
-        <a class="btn btn-info my-4" href="{{ route('stores.create') }}">Ajouter un nouvel événement</a>
+        <a class="btn btn-info my-4" href="{{ route('stores.create') }}">Ajouter une pierre</a>
     </div>
     <table class="table table-hover">
         <thead>
