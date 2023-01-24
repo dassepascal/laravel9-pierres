@@ -472,7 +472,7 @@ public function up()
     }
 Attention pb de migration
 php artisan migrate:reset
-modifier l'ordre des tables pour placer la table stone en dernier à cause des cleé étrangères
+modifier l'ordre des tables pour placer la table stone en dernier à cause des cles étrangères
 
 
 creation de categorySeeder
@@ -696,3 +696,18 @@ la category dans edit
 
 mise en place d'un correctif
 ternaire:  <option value="{{  $category->id }}"  {{ $category->id === $stone->category->id ? 'selected':'' }}>{{ $category->label }}</option>
+
+mise en place de one to many pour image
+
+dans la table image :
+ public function up()
+    {
+        Schema::create('images', function (Blueprint $table) {
+            $table->id();
+            $table->string('image');
+            // $table->unsignedBigInteger('stone_id');
+            // $table->foreign('stone_id')->references('id')->on('stones');
+             $table->foreignId('stone_id')->constrained();// nouvelle ecriture à partir de laravel 7
+            $table->timestamps();
+        });
+    }

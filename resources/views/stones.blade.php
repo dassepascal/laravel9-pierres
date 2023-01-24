@@ -12,9 +12,9 @@
             <div class="col-md-6 col-sm-12">
                 <div class="card my-3">
                     <div class="card-body">
-                        <h5 class="card-title ">{{ $stone->name }}</h5>
+                        <h5 class="card-title custom-title ">{{ $stone->name }}</h5>
                           <div>
-                <h5>Categorie : <span class="badge rounded-pill text-bg-dark">{{ $stone->category->label }}</span></h5>
+                <h5 class="categorie">Categorie : <span class="category_color">{{ $stone->category->label }}</span></h5>
 
             </div>
                         <p class="card-text">

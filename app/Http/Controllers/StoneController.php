@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Stone;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -46,6 +47,8 @@ class StoneController extends Controller
     {
         return view('stones.create',[
             'categories'=>Category::all(),
+            // lors de la creation on veut recuperer les images nom_image = nom_stone
+            'images' => Image::all(),
         ]);
     }
 
